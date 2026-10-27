@@ -60,7 +60,7 @@ export function renderCaseFilePdf({ caseData: c, pack, user, claimant, opponent,
   row('Paid after claims', inr(paid));
   row('Outstanding', inr(outstanding), { bold: true });
   doc.moveDown(3).font('Helvetica').fontSize(8.5).fillColor(MUTED)
-    .text('Prepared with HaqDaar from the facts confirmed by the claimant. Amounts are estimates under the rules cited. This is guidance, not legal advice.', M, doc.y, { width });
+    .text('Prepared with ClaimForge from the facts confirmed by the claimant. Amounts are estimates under the rules cited. This is guidance, not legal advice.', M, doc.y, { width });
 
   // ---- Calculation ----
   doc.addPage();

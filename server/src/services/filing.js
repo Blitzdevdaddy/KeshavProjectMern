@@ -58,7 +58,7 @@ export function buildFilingPack(c, pack, stageIndex, user) {
       const replies = (log.replies || []).filter((r) => r.outcome !== 'no_response').map((r) => `Reply to ${s.label} received on ${isoDay(r.receivedAt)} (${r.outcome.replace('_', ' ')})`);
       return [own, ...replies];
     }),
-    'Calculation sheet (HaqDaar case file)',
+    'Calculation sheet (ClaimForge case file)',
   ].filter((a, i, all) => all.indexOf(a) === i);
 
   return {

@@ -17,7 +17,7 @@ export function createApp() {
   }));
   app.use(express.json({ limit: '200kb' }));
   if (env.NODE_ENV !== 'test') app.use(morgan(env.NODE_ENV === 'production' ? 'combined' : 'dev'));
-  app.get('/', (_req, res) => res.json({ name: 'HaqDaar API', docs: '/api/health' }));
+  app.get('/', (_req, res) => res.json({ name: 'ClaimForge API', docs: '/api/health' }));
   app.use('/api', apiLimiter, routes);
   app.use(notFoundHandler);
   app.use(errorHandler);

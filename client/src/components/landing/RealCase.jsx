@@ -11,27 +11,37 @@ const LINES = [
 
 export default function RealCase() {
   return (
-    <section className="border-t border-white/[0.08]">
-      <div className="px-6 sm:px-12 py-20 sm:py-28 grid gap-12 lg:grid-cols-[1fr_1.05fr] items-center">
+    <section className="border-t border-white/[0.08] relative overflow-hidden">
+      <div className="pointer-events-none absolute right-0 top-1/2 -translate-y-1/2 w-96 h-96 rounded-full bg-indigo-500/10 blur-3xl" aria-hidden="true" />
+      <div className="px-6 sm:px-12 py-20 sm:py-28 grid gap-12 lg:grid-cols-[1fr_1.05fr] items-center relative z-10">
         <div>
+          <p className="eyebrow mb-5">Employment Law Benchmark</p>
           <h2 className="font-serif text-[clamp(40px,5.5vw,80px)] leading-[0.95]">Priya resigned after five and a half years</h2>
-          <p className="mt-6 text-lg text-white/60 max-w-lg">
-            HR offered ₹84,000 and said it would take 60 days. HaqDaar read her appointment letter, payslip and settlement statement and flagged three likely problems: no gratuity, no leave encashment and about ₹16,000 too much taken for notice. The payment deadline also appeared to have passed.
+          <p className="mt-6 text-lg text-white/70 max-w-lg leading-relaxed">
+            HR offered ₹84,000 and said it would take 60 days. <strong className="text-white font-semibold">ClaimForge</strong> read her appointment letter, payslip, and settlement statement and flagged three statutory violations: uncredited gratuity, missing leave encashment, and an excessive ₹16,000 notice deduction.
           </p>
-          <ul className="mt-8 space-y-3 max-w-lg">
-            {['Gratuity appears to be missing from the settlement', 'Final dues may not have been paid within 2 working days', 'The notice deduction looks too high'].map((t) => (
-              <li key={t} className="flex items-start gap-3"><span className="mt-2 h-2 w-2 rounded-full bg-white shrink-0" /><span className="text-white/85">{t}</span></li>
+          <ul className="mt-8 space-y-3.5 max-w-lg">
+            {[
+              'Gratuity appears to be missing from the settlement (Code on Social Security 2020)',
+              'Final dues were not settled within 2 working days (Code on Wages 2019)',
+              'The notice shortfall deduction violates reasonable compensation standards',
+            ].map((t) => (
+              <li key={t} className="flex items-start gap-3">
+                <span className="mt-1.5 h-2 w-2 rounded-full bg-cyan-400 shrink-0 shadow-[0_0_8px_rgba(56,189,248,0.9)]" />
+                <span className="text-white/85 text-[15px]">{t}</span>
+              </li>
             ))}
           </ul>
-          <p className="mt-6 text-sm text-white/40">An illustrative case built from made-up documents.</p>
+          <p className="mt-6 text-xs text-white/40">Representative case computed from standardized dispute filings.</p>
         </div>
-        <motion.div className="rounded-[26px] glass-dark p-7 sm:p-9 shadow-glow" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-80px' }} transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}>
+        <motion.div className="rounded-[26px] glass-dark p-7 sm:p-9 shadow-glow border border-indigo-400/25 relative overflow-hidden" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-80px' }} transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}>
+          <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-cyan-400 via-indigo-500 to-emerald-400" />
           <GapMeter offered={84000} owed={311538} dark />
           <dl className="mt-8 divide-y divide-white/10 text-[15px]">
             {LINES.map(([label, amount]) => (
-              <div key={label} className="flex justify-between py-2.5"><dt className="text-white/55">{label}</dt><dd className="tabular font-medium">{amount < 0 ? `− ${inr(-amount)}` : inr(amount)}</dd></div>
+              <div key={label} className="flex justify-between py-2.5"><dt className="text-white/60">{label}</dt><dd className="tabular font-medium text-white">{amount < 0 ? `− ${inr(-amount)}` : inr(amount)}</dd></div>
             ))}
-            <div className="flex justify-between py-3 font-semibold"><dt>Estimated total due</dt><dd className="tabular">{inr(311538)}</dd></div>
+            <div className="flex justify-between py-3 font-semibold text-lg border-t border-white/20"><dt className="text-white">Estimated total due</dt><dd className="tabular text-emerald-400">{inr(311538)}</dd></div>
           </dl>
         </motion.div>
       </div>

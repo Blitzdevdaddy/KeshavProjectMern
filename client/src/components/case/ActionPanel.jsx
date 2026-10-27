@@ -38,7 +38,7 @@ async function downloadCaseFile(caseId) {
   const url = URL.createObjectURL(res.data);
   const a = document.createElement('a');
   a.href = url;
-  a.download = 'haqdaar-case-file.pdf';
+  a.download = 'claimforge-case-file.pdf';
   document.body.appendChild(a);
   a.click();
   a.remove();
@@ -154,7 +154,7 @@ function FilingPack({ filing }) {
   return (
     <div className="space-y-6">
       <p className="rounded-xl bg-mist px-4 py-3 text-sm text-steel">
-        Portals ask you to log in with your own mobile number and OTP. HaqDaar can't log in or file for you, but everything you need to paste is here.
+        Portals ask you to log in with your own mobile number and OTP. ClaimForge can't log in or file for you, but everything you need to paste is here.
       </p>
 
       {filing.filingSteps?.length > 0 && (
@@ -345,16 +345,17 @@ export default function ActionPanel({ caseData }) {
   const stepEnabled = { prepare: true, send: !sent, track: sent };
 
   return (
-    <section className="rounded-panel bg-ink text-white p-6 sm:p-8" aria-labelledby="next-h">
-      <p className="text-white/60 text-sm">Stage {caseData.stageIndex + 1} of {caseData.stages.length}{portal ? ' · Online complaint' : ' · Letter'}</p>
+    <section className="rounded-panel glacier-wash text-white p-6 sm:p-8 border border-indigo-400/20 shadow-lift relative overflow-hidden" aria-labelledby="next-h">
+      <div className="pointer-events-none absolute top-0 right-0 w-64 h-64 rounded-full bg-cyan-500/10 blur-3xl" />
+      <p className="text-sky-300 text-xs font-semibold uppercase tracking-wider">Stage {caseData.stageIndex + 1} of {caseData.stages.length}{portal ? ' · Online complaint' : ' · Letter'}</p>
       <h2 id="next-h" className="font-serif text-4xl mt-1">{stage.label}</h2>
-      <p className="mt-2 text-white/75">To: {portal ? stage.portalName || stage.recipient : stage.recipient}</p>
+      <p className="mt-2 text-white/80">To: {portal ? stage.portalName || stage.recipient : stage.recipient}</p>
       <p className="mt-1 text-white/60 text-sm">{stage.howToSend}</p>
 
-      <div className="mt-6 grid grid-cols-3 gap-1 rounded-full bg-white/5 p-1" role="tablist" aria-label="Steps for this stage">
+      <div className="mt-6 grid grid-cols-3 gap-1 rounded-full bg-white/[0.08] p-1 border border-white/10" role="tablist" aria-label="Steps for this stage">
         {steps.map(([key, n, label]) => (
           <button key={key} type="button" role="tab" aria-selected={step === key} disabled={!stepEnabled[key]} onClick={() => setStep(key)}
-            className={`rounded-full px-2 py-2 text-sm transition disabled:opacity-35 ${step === key ? 'bg-white text-ink font-semibold' : 'text-white/75 hover:bg-white/10'}`}>
+            className={`rounded-full px-2 py-2 text-sm transition disabled:opacity-35 ${step === key ? 'bg-gradient-to-r from-indigo-600 to-indigo-700 text-white font-bold shadow-brand' : 'text-white/75 hover:bg-white/10'}`}>
             <span className="tabular mr-1 text-xs">{n}</span>{label}
           </button>
         ))}
@@ -365,7 +366,7 @@ export default function ActionPanel({ caseData }) {
         <div className="mt-6" role="tabpanel">
           {portal ? (
             <>
-              <p className="text-white/75 text-sm">This stage is filed online on {stage.portalName}. HaqDaar has prepared every field for you to copy.</p>
+              <p className="text-white/75 text-sm">This stage is filed online on {stage.portalName}. ClaimForge has prepared every field for you to copy.</p>
               <div className="mt-5 flex flex-wrap gap-3">
                 <button className="btn-white" onClick={() => setModal('filing')} disabled={filingQ.isLoading}>{filingQ.isLoading ? <Spinner /> : <FileText className="h-4 w-4" />}Open filing pack</button>
                 {(stage.entryUrl || stage.portalUrl) && <a href={stage.entryUrl || stage.portalUrl} target="_blank" rel="noopener noreferrer" className="btn glass-dark text-white hover:bg-white/10"><ExternalLink className="h-4 w-4" />Open {stage.portalName} (you'll log in first)</a>}

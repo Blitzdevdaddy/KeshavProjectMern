@@ -168,7 +168,7 @@ export default function FactsForm({ caseData, pack }) {
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
           <h2 id="facts-h" className="font-serif text-3xl">Check the facts</h2>
-          <p className="text-steel text-sm mt-1">Everything HaqDaar concludes depends on these. Fields marked with a dot are required.</p>
+          <p className="text-steel text-sm mt-1">Everything ClaimForge concludes depends on these. Fields marked with a dot are required.</p>
         </div>
         <p className="text-sm text-steel tabular" aria-live="polite">{requiredFilled} of {required.length} required filled</p>
       </div>

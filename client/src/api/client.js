@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
-const TOKEN_KEY = 'haqdaar.token';
+const TOKEN_KEY = 'claimforge.token';
 
 export const tokenStore = {
   get: () => { try { return localStorage.getItem(TOKEN_KEY); } catch { return null; } },
@@ -40,7 +40,7 @@ export const fieldErrors = (err) => err?.response?.data?.error?.details?.fields 
 
 export async function downloadLetter(caseId, stage) {
   const res = await api.get(`/cases/${caseId}/letter`, { params: { stage }, responseType: 'blob' });
-  const name = /filename="([^"]+)"/.exec(res.headers['content-disposition'] || '')?.[1] || 'haqdaar-letter.pdf';
+  const name = /filename="([^"]+)"/.exec(res.headers['content-disposition'] || '')?.[1] || 'claimforge-letter.pdf';
   const url = URL.createObjectURL(res.data);
   const a = document.createElement('a');
   a.href = url;

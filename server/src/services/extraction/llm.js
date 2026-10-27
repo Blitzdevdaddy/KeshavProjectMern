@@ -28,7 +28,7 @@ export async function complete(system, user) {
   if (env.LLM_PROVIDER === 'openrouter') {
     if (!env.OPENROUTER_API_KEY) throw new AppError(503, 'Document reading is not configured. Enter the facts by hand.');
     // OpenRouter speaks the OpenAI chat format and routes to the model named in OPENROUTER_MODEL.
-    const data = await postJSON('https://openrouter.ai/api/v1/chat/completions', { Authorization: `Bearer ${env.OPENROUTER_API_KEY}`, 'X-Title': 'HaqDaar' }, {
+    const data = await postJSON('https://openrouter.ai/api/v1/chat/completions', { Authorization: `Bearer ${env.OPENROUTER_API_KEY}`, 'X-Title': 'ClaimForge' }, {
       model: env.OPENROUTER_MODEL,
       temperature: 0,
       max_tokens: 2000,

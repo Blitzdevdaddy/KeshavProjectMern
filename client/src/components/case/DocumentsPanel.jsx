@@ -44,7 +44,7 @@ export default function DocumentsPanel({ caseData, editable }) {
       <div className="flex items-start justify-between gap-4">
         <div>
           <h2 id="docs-h" className="font-serif text-3xl">Documents</h2>
-          <p className="text-steel text-sm mt-1 max-w-lg">Add the documents you have. HaqDaar reads them and fills in the facts for you to check. Files are read and discarded; only their text is kept.</p>
+          <p className="text-steel text-sm mt-1 max-w-lg">Add the documents you have. ClaimForge reads them and fills in the facts for you to check. Files are read and discarded; only their text is kept.</p>
         </div>
       </div>
 

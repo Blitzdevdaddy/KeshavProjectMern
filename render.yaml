@@ -1,7 +1,7 @@
 # Render Blueprint for the API. In Render: New > Blueprint > pick this repo.
 services:
   - type: web
-    name: haqdaar-api
+    name: claimforge-api
     runtime: node
     rootDir: server
     plan: free

@@ -44,11 +44,12 @@ export function Modal({ open, onClose, title, children, width = 'max-w-lg' }) {
           <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" style={{ zIndex: 0 }} onClick={onClose} aria-hidden="true" />
           <motion.div
             role="dialog" aria-modal="true" aria-label={title} data-lenis-prevent
-            className={`relative w-full ${width} rounded-[26px] bg-white p-6 sm:p-7 shadow-2xl max-h-[88vh] overflow-y-auto`}
+            className={`relative w-full ${width} rounded-[28px] bg-white p-6 sm:p-8 shadow-2xl border border-line/80 max-h-[88vh] overflow-y-auto`}
             style={{ zIndex: 1, color: '#0E1726' }}
             initial={{ y: 24, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: 16, opacity: 0 }}
             transition={{ type: 'spring', stiffness: 320, damping: 30 }}
           >
+            <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-sky-400 via-indigo-500 to-emerald-400" />
             <div className="flex items-start justify-between gap-4 mb-4">
               <h2 className="font-serif text-[28px] leading-tight">{title}</h2>
               <button onClick={onClose} className="rounded-full p-2 hover:bg-black/5" aria-label="Close"><X className="h-5 w-5" /></button>

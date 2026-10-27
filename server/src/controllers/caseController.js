@@ -214,7 +214,7 @@ export async function downloadLetter(req, res) {
   // Uses the user's edited draft when there is one.
   const { letter } = getLetterDraft(c, pack, stageIndex, req.user);
 
-  const filename = `haqdaar-${pack.key}-${stage.key}.pdf`;
+  const filename = `claimforge-${pack.key}-${stage.key}.pdf`;
   res.setHeader('Content-Type', 'application/pdf');
   res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
   renderLetterPdf({ letter, user: req.user, stage }).pipe(res);
@@ -271,7 +271,7 @@ export async function caseFile(req, res) {
   }).filter(Boolean);
 
   res.setHeader('Content-Type', 'application/pdf');
-  res.setHeader('Content-Disposition', `attachment; filename="haqdaar-case-file-${pack.key}.pdf"`);
+  res.setHeader('Content-Disposition', `attachment; filename="claimforge-case-file-${pack.key}.pdf"`);
   renderCaseFilePdf({
     caseData: c.toObject(),
     pack,

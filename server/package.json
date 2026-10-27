@@ -1,7 +1,7 @@
 {
-  "name": "haqdaar-server",
+  "name": "claimforge-api",
   "version": "1.0.0",
-  "description": "HaqDaar API: turns legal rights into calculated claims, letters and escalation tracking",
+  "description": "ClaimForge API: turns legal rights into calculated claims, letters and escalation tracking",
   "type": "module",
   "main": "src/server.js",
   "scripts": {

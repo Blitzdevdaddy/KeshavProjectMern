@@ -8,14 +8,14 @@ export default function StageLadder({ stages, stageIndex, status }) {
         const done = i < stageIndex || (finished && i === stageIndex);
         const current = i === stageIndex && !finished;
         return (
-          <li key={s.key} className={`rounded-2xl border p-4 ${current ? 'border-ink bg-white' : done ? 'border-line bg-white/60' : 'border-dashed border-line'}`} aria-current={current ? 'step' : undefined}>
+          <li key={s.key} className={`rounded-2xl border p-4 transition-all ${current ? 'border-indigo-600 bg-white shadow-brand ring-2 ring-indigo-500/20' : done ? 'border-emerald-200 bg-emerald-50/50' : 'border-dashed border-line bg-white/40'}`} aria-current={current ? 'step' : undefined}>
             <div className="flex items-center gap-2.5">
-              <span className={`h-7 w-7 rounded-full grid place-items-center text-xs font-semibold ${done ? 'bg-emerald text-white' : current ? 'bg-ink text-white' : 'bg-mist text-steel'}`}>
-                {done ? <Check className="h-4 w-4" /> : i + 1}
+              <span className={`h-7 w-7 rounded-full grid place-items-center text-xs font-bold ${done ? 'bg-emerald-600 text-white shadow-sm' : current ? 'bg-gradient-to-r from-indigo-600 to-indigo-700 text-white shadow-brand' : 'bg-slate-200 text-steel'}`}>
+                {done ? <Check className="h-4 w-4 stroke-[2.5]" /> : i + 1}
               </span>
-              <p className={`font-semibold ${!current && !done ? 'text-steel' : ''}`}>{s.label}</p>
+              <p className={`font-semibold ${current ? 'text-indigo-950 font-bold' : done ? 'text-emerald-900' : 'text-steel'}`}>{s.label}</p>
             </div>
-            <p className="text-sm text-steel mt-2">{s.recipient}</p>
+            <p className="text-xs text-steel mt-2 font-medium">{s.recipient}</p>
           </li>
         );
       })}

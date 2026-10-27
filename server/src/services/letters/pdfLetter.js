@@ -73,7 +73,7 @@ export function renderLetterPdf({ letter, user, stage }) {
 
   doc.moveDown(2);
   doc.font('Helvetica').fontSize(8).fillColor(MUTED).text(
-    `Stage: ${clean(stage.label)}. How to send: ${clean(stage.howToSend || 'by email and registered post')}. Prepared with HaqDaar. This letter is guidance, not legal advice.`,
+    `Stage: ${clean(stage.label)}. How to send: ${clean(stage.howToSend || 'by email and registered post')}. Prepared with ClaimForge. This letter is guidance, not legal advice.`,
     { width }
   );
   doc.end();

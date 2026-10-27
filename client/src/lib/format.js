@@ -10,23 +10,23 @@ export const ago = (d) => {
 };
 
 export const STATUS = {
-  draft: { label: 'Collecting facts', tone: 'bg-mist text-steel' },
-  confirmed: { label: 'Facts confirmed', tone: 'bg-glacier-100 text-glacier-700' },
-  letter_ready: { label: 'Letter ready', tone: 'bg-marigold/15 text-[#8A5A12]' },
-  awaiting_response: { label: 'Waiting for reply', tone: 'bg-glacier-100 text-glacier-700' },
-  resolved: { label: 'Resolved', tone: 'bg-emerald/10 text-emerald' },
-  closed: { label: 'Closed', tone: 'bg-mist text-steel' },
+  draft: { label: 'Collecting facts', tone: 'bg-slate-100 text-slate-700 border border-slate-200/80 shadow-sm' },
+  confirmed: { label: 'Facts confirmed', tone: 'bg-sky-50 text-sky-700 border border-sky-200 shadow-sm' },
+  letter_ready: { label: 'Letter ready', tone: 'bg-amber-50 text-amber-800 border border-amber-200 shadow-sm font-semibold' },
+  awaiting_response: { label: 'Waiting for reply', tone: 'bg-indigo-50 text-indigo-700 border border-indigo-200 shadow-sm' },
+  resolved: { label: 'Resolved', tone: 'bg-emerald-50 text-emerald-700 border border-emerald-200 shadow-sm font-semibold' },
+  closed: { label: 'Closed', tone: 'bg-slate-100 text-slate-500 border border-slate-200' },
 };
 
 export const SEVERITY = {
-  high: { label: 'Strong point', dot: 'bg-crimson', ring: 'border-crimson/25' },
-  medium: { label: 'Worth raising', dot: 'bg-marigold', ring: 'border-marigold/30' },
-  info: { label: 'Good to know', dot: 'bg-glacier-500', ring: 'border-line' },
+  high: { label: 'Strong statutory point', dot: 'bg-rose-500 shadow-[0_0_8px_rgba(244,63,94,0.7)]', ring: 'border-rose-200 bg-rose-50/40' },
+  medium: { label: 'Worth raising', dot: 'bg-amber-500 shadow-[0_0_8px_rgba(245,158,11,0.7)]', ring: 'border-amber-200 bg-amber-50/40' },
+  info: { label: 'Good to know', dot: 'bg-indigo-500 shadow-[0_0_8px_rgba(99,102,241,0.7)]', ring: 'border-indigo-100 bg-indigo-50/30' },
 };
 
-// Each case type is a "gem": a thing of value you are owed.
+// Each case type is a "gem": vivid, luminous jewel tones representing rightful entitlements
 export const GEMS = {
-  employment: { name: 'Pearl', mid: '#F4F4F1', deep: '#8E8E8A', light: '#FFFFFF', shadow: 'rgba(0,0,0,.22)' },
-  flight: { name: 'Silver', mid: '#C9C9C4', deep: '#4A4A48', light: '#FFFFFF', shadow: 'rgba(0,0,0,.28)' },
-  rent: { name: 'Onyx', mid: '#2E2E2E', deep: '#050505', light: '#A8A8A4', shadow: 'rgba(0,0,0,.38)' },
+  employment: { name: 'Sapphire', mid: '#3B82F6', deep: '#1E3A8A', light: '#93C5FD', shadow: 'rgba(37,99,235,0.45)' },
+  flight: { name: 'Amethyst', mid: '#8B5CF6', deep: '#4C1D95', light: '#C4B5FD', shadow: 'rgba(139,92,246,0.45)' },
+  rent: { name: 'Emerald', mid: '#10B981', deep: '#064E3B', light: '#6EE7B7', shadow: 'rgba(16,185,129,0.45)' },
 };

@@ -77,15 +77,19 @@ export default function Auth({ mode }) {
               <button className="btn-primary w-full h-12" disabled={busy}>{busy && <Spinner />}{isRegister ? 'Create account' : 'Log in'}</button>
             </form>
             <p className="mt-6 text-sm text-steel">
-              {isRegister ? 'Already have an account?' : 'New to HaqDaar?'}{' '}
-              <Link to={otherHref} className="font-semibold text-ink underline underline-offset-4">{isRegister ? 'Log in' : 'Create an account'}</Link>
+              {isRegister ? 'Already have an account?' : 'New to ClaimForge?'}{' '}
+              <Link to={otherHref} className="font-semibold text-indigo-600 underline underline-offset-4 hover:text-indigo-500">{isRegister ? 'Log in' : 'Create an account'}</Link>
             </p>
           </div>
           <p className="text-xs text-steel">Guidance, not legal advice. Your documents are read and then discarded; only the extracted text is kept.</p>
         </motion.section>
-        <section className="hidden lg:block relative rounded-panel glacier-wash overflow-hidden">
+        <section className="hidden lg:block relative rounded-panel glacier-wash overflow-hidden border border-indigo-400/20">
+          <div className="pointer-events-none absolute top-10 right-10 w-80 h-80 rounded-full bg-cyan-500/15 blur-3xl animate-pulse-slow" />
           <Suspense fallback={null}><HeroScene className="absolute inset-0" /></Suspense>
-          <p className="absolute left-10 bottom-10 right-10 text-white display-serif text-[clamp(48px,6vw,96px)]">What is yours, in writing</p>
+          <div className="absolute left-10 bottom-10 right-10">
+            <span className="eyebrow mb-3">Statutory Claims Platform</span>
+            <p className="text-white display-serif text-[clamp(48px,6vw,96px)]">What is yours, <span className="text-aurora">in writing</span></p>
+          </div>
         </section>
       </main>
     </Page>

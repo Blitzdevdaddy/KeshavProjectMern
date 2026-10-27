@@ -339,16 +339,17 @@ export function Key() {
   );
 }
 
-// Shared studio lighting: soft white panels, so silver and lacquer read without any coloured light.
+// Shared studio lighting: subtle cyan and violet rim lightformers give silver and lacquer vibrant high-tech specular gleam.
 export function Studio({ intensity = 1 }) {
   return (
     <>
-      <ambientLight intensity={0.35 * intensity} />
+      <ambientLight intensity={0.4 * intensity} />
       <directionalLight position={[3, 5, 4]} intensity={1.6 * intensity} />
+      <directionalLight position={[-4, -2, -2]} intensity={0.8 * intensity} color="#38bdf8" />
       <Environment resolution={128}>
-        <Lightformer form="rect" intensity={3 * intensity} position={[0, 4, 3]} scale={[8, 2, 1]} color="#ffffff" />
-        <Lightformer form="rect" intensity={1.6 * intensity} position={[-5, 0, 2]} scale={[2, 6, 1]} color="#ffffff" />
-        <Lightformer form="rect" intensity={1.2 * intensity} position={[5, -1, 2]} scale={[2, 5, 1]} color="#E8E8E4" />
+        <Lightformer form="rect" intensity={3.5 * intensity} position={[0, 4, 3]} scale={[8, 2, 1]} color="#ffffff" />
+        <Lightformer form="rect" intensity={2.2 * intensity} position={[-5, 1, 2]} scale={[3, 6, 1]} color="#38bdf8" />
+        <Lightformer form="rect" intensity={1.8 * intensity} position={[5, -1, 2]} scale={[3, 5, 1]} color="#818cf8" />
       </Environment>
     </>
   );

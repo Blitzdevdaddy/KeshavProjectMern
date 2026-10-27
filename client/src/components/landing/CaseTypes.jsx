@@ -42,31 +42,50 @@ export default function CaseTypes() {
   );
 }
 
+const HOVER_GLOW = {
+  employment: 'hover:border-blue-400/50 hover:shadow-[0_12px_40px_-8px_rgba(59,130,246,0.3)]',
+  flight: 'hover:border-purple-400/50 hover:shadow-[0_12px_40px_-8px_rgba(139,92,246,0.3)]',
+  rent: 'hover:border-emerald-400/50 hover:shadow-[0_12px_40px_-8px_rgba(16,185,129,0.3)]',
+};
+
+const SCENE_BG = {
+  employment: 'bg-[radial-gradient(55%_65%_at_50%_45%,rgba(59,130,246,.25),rgba(30,58,138,.08)_70%)]',
+  flight: 'bg-[radial-gradient(55%_65%_at_50%_45%,rgba(139,92,246,.25),rgba(76,29,149,.08)_70%)]',
+  rent: 'bg-[radial-gradient(55%_65%_at_50%_45%,rgba(16,185,129,.25),rgba(6,78,59,.08)_70%)]',
+};
+
 function CaseCard({ pack, href }) {
   const [hovered, setHovered] = useState(false);
   const live = pack.status === 'live';
   // Four small 3D scenes are fine on a desktop; phones get a flat icon instead.
   const show3d = useMedia('(min-width: 768px)');
   const Icon = ICONS[pack.key] || Briefcase;
+  const glow = HOVER_GLOW[pack.key] || 'hover:border-white/40';
+  const sceneBg = SCENE_BG[pack.key] || 'bg-[radial-gradient(55%_65%_at_50%_45%,rgba(255,255,255,.16),rgba(255,255,255,.03)_70%)]';
   const icon = <div className="absolute inset-0 grid place-items-center"><Icon className={`h-12 w-12 ${live ? 'text-white' : 'text-white/40'}`} strokeWidth={1.25} /></div>;
   const body = (
     <>
-      <div className="relative -mx-2 -mt-2 h-40 rounded-[18px] bg-[radial-gradient(55%_65%_at_50%_45%,rgba(255,255,255,.16),rgba(255,255,255,.03)_70%)] overflow-hidden">
+      <div className={`relative -mx-2 -mt-2 h-40 rounded-[18px] ${sceneBg} overflow-hidden border border-white/10`}>
         {show3d ? (
           <Suspense fallback={icon}>
             <CaseObject packKey={pack.key} hovered={hovered} muted={!live} className="absolute inset-0" />
           </Suspense>
         ) : icon}
-        <span className={`absolute top-3 right-3 rounded-full px-2.5 py-1 text-[11px] font-semibold ${live ? 'bg-white text-ink' : 'bg-white/10 text-white/60'}`}>{live ? 'Live' : 'Soon'}</span>
+        <span className={`absolute top-3 right-3 rounded-full px-2.5 py-1 text-[11px] font-semibold flex items-center gap-1.5 ${live ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-400/30' : 'bg-white/10 text-white/60'}`}>
+          {live && <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />}
+          {live ? 'Statutory Live' : 'Coming soon'}
+        </span>
       </div>
-      <h3 className="mt-6 font-serif text-[28px] leading-[1.04]">{pack.name}</h3>
-      <p className="mt-2 text-white/55">{pack.tagline}</p>
-      <p className={`mt-6 text-sm font-semibold ${live ? 'text-white' : 'text-white/40'}`}>{live ? 'Start this claim →' : 'Coming soon'}</p>
+      <h3 className="mt-6 font-serif text-[28px] leading-[1.04] text-white">{pack.name}</h3>
+      <p className="mt-2 text-white/60 text-sm leading-relaxed">{pack.tagline}</p>
+      <p className={`mt-6 text-sm font-semibold flex items-center gap-1 transition-all ${live ? 'text-sky-400 group-hover:text-sky-300' : 'text-white/40'}`}>
+        {live ? 'Start this claim →' : 'Coming soon'}
+      </p>
     </>
   );
   const hover = { onMouseEnter: () => setHovered(true), onMouseLeave: () => setHovered(false) };
   return live ? (
-    <Link to={href} {...hover} onFocus={() => setHovered(true)} onBlur={() => setHovered(false)} className="block h-full rounded-[24px] bg-white/[0.03] border border-white/10 backdrop-blur-sm p-4 pb-7 transition hover:-translate-y-1 hover:border-white/40 hover:bg-white/[0.06]">{body}</Link>
+    <Link to={href} {...hover} onFocus={() => setHovered(true)} onBlur={() => setHovered(false)} className={`group block h-full rounded-[24px] bg-white/[0.04] border border-white/10 backdrop-blur-md p-4 pb-7 transition duration-300 hover:-translate-y-1.5 ${glow} hover:bg-white/[0.07]`}>{body}</Link>
   ) : (
     <div {...hover} className="h-full rounded-[24px] bg-white/[0.015] border border-white/[0.06] p-4 pb-7" aria-disabled="true">{body}</div>
   );

@@ -1,6 +1,7 @@
 import { lazy, Suspense } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { ArrowRight, Sparkles } from 'lucide-react';
 import Logo from '../ui/Logo';
 import { scrollToId } from '../ui/SmoothScroll';
 import { useAuth } from '../../context/AuthContext';
@@ -9,7 +10,7 @@ import { useMedia } from '../../lib/useMedia';
 const HeroScene = lazy(() => import('../three/HeroScene'));
 const ease = [0.22, 1, 0.36, 1];
 
-// The headline mixes a tall serif with an expanded black grotesk, each line set full width.
+// Headline combining serif editorial and expanded black grotesk
 const LINES = [
   [['KNOW', 'serif'], ['WHAT', 'black']],
   [['THE LAW', 'serif'], ['SAYS', 'black']],
@@ -17,33 +18,41 @@ const LINES = [
 ];
 
 const STEPS = [
-  { title: 'Read', text: 'Upload your payslips, ticket or rental agreement. The facts are pulled out for you to check.' },
-  { title: 'Check', text: 'Rules from the Labour Codes, the DGCA rules and your rental agreement test every fact, with citations.' },
-  { title: 'Claim', text: 'See an estimate with the working shown, a formal letter, and a tracker for each deadline.' },
+  { title: 'Read', subtitle: 'Automated Extraction', text: 'Upload payslips, e-tickets, or tenancy contracts. Data is extracted into structured fields for your confirmation.' },
+  { title: 'Check', subtitle: 'Statutory Verification', text: 'Tested against Code on Wages, DGCA passenger mandates, and Contract Act provisions with exact citations.' },
+  { title: 'Claim', subtitle: 'Formal Recovery', text: 'Get calculated compensation breakdowns, ready-to-dispatch legal notice PDFs, and escalation countdowns.' },
 ];
 
 export default function Hero() {
   const { user } = useAuth();
   const startHref = user ? '/cases/new' : '/register';
-  // The 3D scene is decoration; phones skip it to save battery and data.
   const show3d = useMedia('(min-width: 768px)');
+
   return (
-    <section>
-      <div className="relative min-h-svh overflow-hidden flex flex-col">
+    <section className="relative overflow-hidden">
+      {/* Floating luminous aurora glow orbs */}
+      <div className="pointer-events-none absolute -top-24 -left-24 w-[600px] h-[600px] rounded-full bg-gradient-to-br from-indigo-600/25 via-sky-500/15 to-transparent blur-3xl animate-pulse-slow" aria-hidden="true" />
+      <div className="pointer-events-none absolute top-1/3 -right-24 w-[500px] h-[500px] rounded-full bg-gradient-to-bl from-cyan-500/20 via-emerald-500/10 to-transparent blur-3xl animate-pulse-slow" style={{ animationDelay: '3s' }} aria-hidden="true" />
+
+      <div className="relative min-h-svh flex flex-col justify-between">
+        {/* Navigation header */}
         <header className="relative z-20 flex items-center justify-between gap-4 px-5 sm:px-8 pt-5">
           <Logo light />
-          <nav className="hidden md:flex rounded-full p-1 text-sm bg-white/5 backdrop-blur-md border border-white/10" aria-label="Sections">
+          <nav className="hidden md:flex rounded-full p-1 text-sm bg-white/[0.06] backdrop-blur-xl border border-white/15 shadow-glass" aria-label="Sections">
             {[['how', 'How it works'], ['types', 'Case types'], ['trust', 'Why trust it']].map(([id, label]) => (
-              <button key={id} onClick={() => scrollToId(id)} className="rounded-full px-4 py-2 text-white/80 hover:text-white hover:bg-white/10 transition">{label}</button>
+              <button key={id} onClick={() => scrollToId(id)} className="rounded-full px-4 py-2 text-white/80 hover:text-white hover:bg-white/15 transition">{label}</button>
             ))}
           </nav>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2.5">
             {user ? (
               <Link to="/dashboard" className="btn-white">Your claims</Link>
             ) : (
               <>
                 <Link to="/login" className="hidden sm:inline-flex btn text-white hover:bg-white/10">Log in</Link>
-                <Link to="/register" className="btn-white">Start a claim</Link>
+                <Link to="/register" className="btn-white">
+                  <span>Start a claim</span>
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
               </>
             )}
           </div>
@@ -51,46 +60,64 @@ export default function Hero() {
 
         {show3d && (
           <Suspense fallback={null}>
-            <motion.div className="absolute inset-y-0 right-0 left-[40%] lg:left-[52%] z-0" initial={{ opacity: 0, scale: 0.94 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1.4, ease, delay: 0.4 }}>
-              <HeroScene className="h-full w-full opacity-40 lg:opacity-100" />
+            <motion.div className="absolute inset-y-0 right-0 left-[38%] lg:left-[50%] z-0" initial={{ opacity: 0, scale: 0.94 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1.4, ease, delay: 0.4 }}>
+              <HeroScene className="h-full w-full opacity-45 lg:opacity-100" />
             </motion.div>
           </Suspense>
         )}
 
-        <div className="relative z-10 flex-1 flex flex-col justify-center px-5 sm:px-8 lg:px-12 pt-16 pb-10 pointer-events-none">
-          <motion.p className="eyebrow self-start mb-6 pointer-events-auto" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease, delay: 0.1 }}>
-            <span className="h-1.5 w-1.5 rounded-full bg-white shadow-[0_0_10px_rgba(255,255,255,.8)]" />
-            Jobs · Flights · Rental deposits
-          </motion.p>
-          <h1 className="w-full max-w-[min(100%,600px)]" aria-label="Know what the law says is yours">
+        {/* Hero content */}
+        <div className="relative z-10 flex flex-col justify-center px-5 sm:px-8 lg:px-12 pt-16 pb-8 pointer-events-none">
+          <motion.div className="eyebrow self-start mb-6 pointer-events-auto" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease, delay: 0.1 }}>
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-400" />
+            </span>
+            <span>Statutory Claims · Final Settlements · Delayed Flights · Rental Deposits</span>
+          </motion.div>
+
+          <h1 className="w-full max-w-[min(100%,640px)]" aria-label="Know what the law says is yours">
             {LINES.map((line, i) => (
               <span key={i} className="block overflow-hidden pb-[0.12em]">
                 <motion.span className="flex justify-between gap-[0.25em] text-[clamp(44px,6.2vw,96px)]" initial={{ y: '105%' }} animate={{ y: 0 }} transition={{ duration: 1.1, ease, delay: 0.15 + i * 0.12 }}>
-                  {line.map(([w, style]) => <span key={w} className={`whitespace-nowrap ${style === 'serif' ? 'display-serif text-glacier-100' : 'display-black'} ${w === 'YOURS' ? 'text-aurora' : ''}`}>{w}</span>)}
+                  {line.map(([w, style]) => <span key={w} className={`whitespace-nowrap ${style === 'serif' ? 'display-serif text-white/95' : 'display-black'} ${w === 'YOURS' ? 'text-aurora' : ''}`}>{w}</span>)}
                 </motion.span>
               </span>
             ))}
           </h1>
-          <motion.div className="mt-10 max-w-lg pointer-events-auto" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, ease, delay: 0.75 }}>
-            <p className="text-[17px] leading-relaxed text-white/70">
-              Left a job and the settlement looks short? Flight cancelled and the airline offers only a refund? Landlord kept part of your deposit? HaqDaar checks your documents against the rules, estimates what you may be owed with the working shown, drafts the letter, and helps you follow up.
+
+          <motion.div className="mt-8 max-w-lg pointer-events-auto" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, ease, delay: 0.75 }}>
+            <p className="text-[17px] leading-relaxed text-white/80">
+              Separated from an employer and your final dues are withheld? Flight delayed or cancelled without statutory compensation? Landlord withheld your security deposit? <strong className="text-white font-semibold">ClaimForge</strong> checks your documents against codified regulations, computes exact amounts due, generates formal notices, and tracks government escalation portals.
             </p>
-            <div className="mt-6 flex flex-wrap gap-3">
-              <Link to={startHref} className="btn-white h-12 px-6">Start a claim</Link>
-              <button onClick={() => scrollToId('how')} className="btn h-12 px-6 text-white bg-white/5 border border-white/15 backdrop-blur-md hover:bg-white/10">See how it works</button>
+            <div className="mt-7 flex flex-wrap items-center gap-3.5">
+              <Link to={startHref} className="btn-primary h-12 px-7 font-semibold">
+                <Sparkles className="h-4 w-4" />
+                <span>Start a claim</span>
+              </Link>
+              <button onClick={() => scrollToId('how')} className="btn h-12 px-6 text-white bg-white/5 border border-white/20 backdrop-blur-md hover:bg-white/10 hover:border-white/40 transition">
+                See how it works
+              </button>
             </div>
-            <p className="mt-5 text-xs text-white/45">Guidance, not legal advice. Results depend on the facts you confirm.</p>
+            <p className="mt-4 text-xs text-white/50">Guidance, not legal advice. Computations depend on confirmed factual inputs.</p>
           </motion.div>
         </div>
 
-        <motion.ol className="relative z-10 grid sm:grid-cols-3 border-t border-white/10 mx-5 sm:mx-8 lg:mx-12 mb-6" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1, delay: 1 }}>
-          {STEPS.map((s, i) => (
-            <li key={s.title} className={`pt-5 pb-2 sm:px-6 ${i ? 'sm:border-l border-white/10' : 'sm:pl-0'}`}>
-              <p className="font-serif text-[26px]"><span className="mr-2 align-middle font-sans text-xs font-semibold text-glacier-300 tabular">0{i + 1}</span>{s.title}</p>
-              <p className="text-sm text-white/60 mt-1 max-w-[30ch]">{s.text}</p>
-            </li>
-          ))}
-        </motion.ol>
+        {/* Step overview footer banner */}
+        <motion.div className="relative z-10 mx-5 sm:mx-8 lg:mx-12 mb-6 pointer-events-auto" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 0.9 }}>
+          <ol className="grid sm:grid-cols-3 gap-3 p-3 rounded-2xl border border-white/15 bg-white/[0.04] backdrop-blur-xl shadow-glass">
+            {STEPS.map((s, i) => (
+              <li key={s.title} className="rounded-xl p-4 transition-colors hover:bg-white/[0.05] border border-transparent hover:border-white/10">
+                <div className="flex items-center gap-2">
+                  <span className="grid h-6 w-6 place-items-center rounded-full bg-indigo-500/30 text-[11px] font-bold text-sky-300 tabular">0{i + 1}</span>
+                  <p className="font-serif text-[24px] text-white leading-none">{s.title}</p>
+                </div>
+                <p className="text-xs font-semibold text-sky-400 mt-2 uppercase tracking-wider">{s.subtitle}</p>
+                <p className="text-xs text-white/65 mt-1 leading-relaxed">{s.text}</p>
+              </li>
+            ))}
+          </ol>
+        </motion.div>
       </div>
     </section>
   );

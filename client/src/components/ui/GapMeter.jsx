@@ -31,8 +31,8 @@ export default function GapMeter({ offered = 0, owed = 0, owedLabel, dark = fals
       </div>
       <div className="mt-6 space-y-3">
         {[
-          { label: 'Offered or paid', value: offered, color: dark ? 'bg-white/35' : 'bg-steel/35' },
-          { label: owedLabel || 'Estimated due under the rules', value: owed, color: dark ? 'bg-white' : 'bg-ink' },
+          { label: 'Offered or paid', value: offered, color: dark ? 'bg-white/30' : 'bg-slate-400/40' },
+          { label: owedLabel || 'Estimated due under the rules', value: owed, color: dark ? 'bg-gradient-to-r from-sky-400 via-indigo-400 to-emerald-400 shadow-[0_0_12px_rgba(56,189,248,0.7)]' : 'bg-gradient-to-r from-indigo-600 to-sky-500' },
         ].map((row, i) => (
           <div key={row.label}>
             <div className={`flex justify-between text-sm mb-1.5 ${muted}`}><span>{row.label}</span><span className="tabular font-medium">{inr(row.value)}</span></div>

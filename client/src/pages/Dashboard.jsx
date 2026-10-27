@@ -41,31 +41,34 @@ export default function Dashboard() {
 
         {data && (
           <>
-            <dl className="mt-10 card grid grid-cols-2 lg:grid-cols-4 divide-x divide-y lg:divide-y-0 divide-line overflow-hidden">
+            <div className="mt-8 grid grid-cols-2 lg:grid-cols-4 gap-3.5">
               {[
-                ['Open claims', data.summary.open],
-                ['Overdue replies', data.summary.overdue, data.summary.overdue ? 'text-crimson' : ''],
-                ['Being claimed', inr(data.summary.claimed)],
-                ['Recovered', inr(data.summary.recovered), 'text-emerald'],
-              ].map(([label, value, tone]) => (
-                <div key={label} className="p-5 sm:p-6">
-                  <dt className="text-sm text-steel">{label}</dt>
-                  <dd className={`mt-2 font-serif text-[40px] leading-none tabular ${tone || ''}`}>{value}</dd>
+                { label: 'Open claims', value: data.summary.open, tone: 'text-ink', border: 'from-indigo-500 to-sky-400' },
+                { label: 'Overdue replies', value: data.summary.overdue, tone: data.summary.overdue ? 'text-crimson font-bold' : 'text-steel', border: 'from-rose-500 to-amber-500' },
+                { label: 'Being claimed', value: inr(data.summary.claimed), tone: 'text-indigo-600', border: 'from-blue-600 to-indigo-500' },
+                { label: 'Recovered', value: inr(data.summary.recovered), tone: 'text-emerald font-semibold', border: 'from-emerald-500 to-teal-400' },
+              ].map((m) => (
+                <div key={m.label} className="card p-5 relative overflow-hidden bg-white/95">
+                  <div className={`absolute top-0 inset-x-0 h-1 bg-gradient-to-r ${m.border}`} />
+                  <dt className="text-xs uppercase tracking-wider font-semibold text-steel">{m.label}</dt>
+                  <dd className={`mt-2 font-serif text-[38px] leading-none tabular ${m.tone}`}>{m.value}</dd>
                 </div>
               ))}
-            </dl>
+            </div>
 
             {data.cases.length === 0 ? (
-              <div className="mt-6 rounded-panel glacier-wash text-white p-10 sm:p-14">
-                <h2 className="font-serif text-5xl leading-none">No claims yet</h2>
-                <p className="mt-4 max-w-md text-white/90">Start with whatever you have: an offer letter and payslips, your ticket and the cancellation message, or your rental agreement and the landlord's messages.</p>
-                <Link to="/cases/new" className="btn-white mt-7">Start your first claim</Link>
+              <div className="mt-6 rounded-panel glacier-wash text-white p-10 sm:p-14 shadow-lift border border-indigo-400/20 relative overflow-hidden">
+                <div className="pointer-events-none absolute right-0 bottom-0 w-80 h-80 rounded-full bg-cyan-500/10 blur-3xl" />
+                <p className="eyebrow mb-4">Ready to start</p>
+                <h2 className="font-serif text-5xl leading-none">No active claims yet</h2>
+                <p className="mt-4 max-w-md text-white/80 leading-relaxed">Start with whatever documentation you have: an offer letter and payslips, an e-ticket and cancellation message, or your rental agreement and landlord communications.</p>
+                <Link to="/cases/new" className="btn-primary mt-7 font-semibold">Start your first claim</Link>
               </div>
             ) : (
               <ul className="mt-6 space-y-3">
                 {data.cases.map((c, i) => (
                   <motion.li key={c.id} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 + i * 0.05 }}>
-                    <Link to={`/cases/${c.id}`} className="card flex flex-col md:flex-row md:items-center gap-4 p-5 hover:border-glacier-300 hover:shadow-glass transition">
+                    <Link to={`/cases/${c.id}`} className="card flex flex-col md:flex-row md:items-center gap-4 p-5 hover:border-indigo-300 hover:shadow-brand hover:-translate-y-1 transition duration-200">
                       <Gem packKey={c.packKey} size={42} />
                       <div className="flex-1 min-w-0">
                         <div className="flex flex-wrap items-center gap-2">

@@ -58,7 +58,7 @@ export default function Contact() {
             <p className="eyebrow">Contact us</p>
             <h1 className="mt-6 font-serif text-[clamp(48px,7vw,96px)] leading-[0.92]">Write to <span className="italic">us</span></h1>
             <p className="mt-6 max-w-md text-lg leading-relaxed text-white/65">
-              Questions about how HaqDaar works, feedback on a result, or an idea for a new case type: send it here and it reaches the team.
+              Questions about how ClaimForge works, feedback on a result, or an idea for a new case type: send it here and it reaches the team.
             </p>
             <ul className="mt-10 space-y-4 max-w-md text-[15px]">
               {[
@@ -103,7 +103,7 @@ export default function Contact() {
                     <legend className="label-dark">What is it about?</legend>
                     <div className="flex flex-wrap gap-2">
                       {TOPICS.map(([value, label]) => (
-                        <label key={value} className={`cursor-pointer rounded-full border px-4 py-2 text-sm transition has-[:focus-visible]:outline has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-white has-[:focus-visible]:outline-offset-2 ${form.topic === value ? 'border-white bg-white text-ink' : 'border-white/15 text-white/75 hover:border-white/40'}`}>
+                        <label key={value} className={`cursor-pointer rounded-full border px-4 py-2 text-sm transition has-[:focus-visible]:outline has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-white has-[:focus-visible]:outline-offset-2 ${form.topic === value ? 'border-sky-400 bg-gradient-to-r from-indigo-600 to-indigo-700 text-white font-semibold shadow-brand' : 'border-white/15 text-white/75 hover:border-white/40 hover:bg-white/[0.04]'}`}>
                           <input type="radio" name="topic" value={value} checked={form.topic === value} onChange={set('topic')} className="sr-only" />
                           {label}
                         </label>
@@ -123,7 +123,7 @@ export default function Contact() {
                     <label htmlFor="website">Website</label>
                     <input id="website" tabIndex={-1} autoComplete="off" value={form.website} onChange={set('website')} />
                   </div>
-                  <button className="btn-white w-full h-12" disabled={send.isPending}>{send.isPending && <Spinner />}Send message</button>
+                  <button className="btn-primary w-full h-12 text-base font-semibold" disabled={send.isPending}>{send.isPending && <Spinner />}Send message</button>
                   <p className="text-xs text-white/40">We only use your email to reply to this message.</p>
                 </motion.form>
               )}

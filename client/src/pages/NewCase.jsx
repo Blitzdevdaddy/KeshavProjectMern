@@ -59,7 +59,7 @@ export default function NewCase() {
                   const live = p.status === 'live';
                   const selected = packKey === p.key;
                   return (
-                    <label key={p.key} className={`relative rounded-[24px] p-6 border transition cursor-pointer ${!live ? 'opacity-55 cursor-not-allowed bg-white/50 border-line' : selected ? 'bg-white border-ink shadow-lift' : 'bg-white border-line hover:border-glacier-300'}`}>
+                    <label key={p.key} className={`relative rounded-[24px] p-6 border transition-all cursor-pointer ${!live ? 'opacity-55 cursor-not-allowed bg-white/50 border-line' : selected ? 'bg-white border-indigo-600 ring-2 ring-indigo-500/20 shadow-brand' : 'bg-white border-line hover:border-indigo-200 hover:-translate-y-1 hover:shadow-md'}`}>
                       <input type="radio" name="pack" value={p.key} disabled={!live} checked={selected} onChange={() => choose(p.key)} className="sr-only" />
                       <motion.div animate={{ rotate: selected ? -8 : 0, scale: selected ? 1.08 : 1 }}><Gem packKey={p.key} size={60} /></motion.div>
                       <p className="mt-6 font-serif text-[26px] leading-[1.05]">{p.name}</p>

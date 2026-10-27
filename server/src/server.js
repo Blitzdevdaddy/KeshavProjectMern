@@ -4,7 +4,7 @@ import { createApp } from './app.js';
 
 const start = async () => {
   await connectDB();
-  createApp().listen(env.PORT, () => console.log(`HaqDaar API listening on port ${env.PORT}`));
+  createApp().listen(env.PORT, () => console.log(`ClaimForge API listening on port ${env.PORT}`));
 };
 
 start().catch((err) => {
